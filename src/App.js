@@ -2,6 +2,9 @@ import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
+import { carData } from './data';
+
+const port = 9900
 
 // Create global app object
 const app = express();
@@ -16,7 +19,11 @@ app.use('/static', express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.redirect('/static/index.html');
+  res.send(carData)
 });
+
+app.listen(port, () => {
+  console.log(`App listening on http://localhost:${port}`)
+})
 
 export default app;
